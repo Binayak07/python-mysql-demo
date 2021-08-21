@@ -5,3 +5,4 @@
 - Create Table in a DB
 - Insert a record in a table
 - Select records from a table
+- Select records in a data frame
