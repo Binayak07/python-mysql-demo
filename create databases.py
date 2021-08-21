@@ -6,7 +6,7 @@ try:
     if(conn.is_connected()):
         query  ="SHOW DATABASES"
         cursor = conn.cursor()
-        cursor.execute(query);
+        cursor.execute(query)
         allDBs = [i[0] for i in cursor.fetchall()]
         print(allDBs)
         if "ineuron_demo2" not in allDBs:
