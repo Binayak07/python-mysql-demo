@@ -9,10 +9,12 @@ try:
     print("Table created.")
     with open("MOCK_DATA.csv",'r') as data:
         next(data)
-        data_csv = csv.reader(data, delimiter="\n")
+        data_csv = csv.reader(data, delimiter='\n')
         for i in enumerate(data_csv):
             for j in i[1]:
-                cursor.execute("insert into iEmployee values({DATA})".format(DATA=j))
+                qry="insert into iEmployee values({DATA})".format(DATA=j)
+                print(qry)
+                cursor.execute(qry)
     conn.commit()
     conn.close()
 except Exception as e:
