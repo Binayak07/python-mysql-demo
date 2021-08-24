@@ -1,5 +1,4 @@
 import csv
-import pandas as pd
 import mysql.connector as connection
 
 try:
@@ -8,13 +7,14 @@ try:
     cursor.execute("create table if not exists iEmployee(id int(10) primary key auto_increment,first_name varchar(200),last_name varchar(200),email varchar(200),gender varchar(10),ip_address varchar(200))")
     print("Table created.")
     with open("MOCK_DATA.csv",'r') as data:
-        next(data)
         data_csv = csv.reader(data, delimiter='\n')
-        for i in enumerate(data_csv):
-            for j in i[1]:
-                qry="insert into iEmployee values({DATA})".format(DATA=j)
-                print(qry)
-                cursor.execute(qry)
+        for (ind,i) in enumerate(data_csv):
+            if ind==0:
+                continue;
+            spl = tuple(i[0].split(','))
+            qry="insert into iEmployee(id,first_name,last_name,email,gender,ip_address) values(%s,%s,%s,%s,%s,%s)"
+            # print(qry)
+            cursor.execute(qry,spl)
     conn.commit()
     conn.close()
 except Exception as e:
